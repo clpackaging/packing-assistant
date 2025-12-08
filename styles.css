@@ -309,7 +309,13 @@ button i {
 
 /* Mobile adjustments for screens <= 768px */
 @media (max-width: 768px) {
+    h1 {
+        font-size: 28px; /* smaller than desktop 36px */
+    }
 
+    h2 {
+        font-size: 22px; /* adjust as needed */
+    }
     /* Container */
     .container {
         padding: 20px;
@@ -393,5 +399,6 @@ button i {
         padding: 10px;
     }
 }
+
 
 
