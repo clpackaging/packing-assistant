@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CL Packaging Packing Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📦 CL Packaging Packing Assistant</h1>
+        <h2>Input your dimensions, get your packing material requirements.</h2>
+
+        <div class="input-card">
+            <h3>Enter Item Details</h3>
+
+            <label><i class="fa fa-ruler-horizontal"></i> Length (cm)</label>
+            <input id="lengthInput" type="number" placeholder="Enter length">
+
+            <label><i class="fa fa-ruler-vertical"></i> Width (cm)</label>
+            <input id="widthInput" type="number" placeholder="Enter width">
+
+            <label><i class="fa fa-arrows-up-down-left-right"></i> Height (cm)</label>
+            <input id="heightInput" type="number" placeholder="Enter height">
+
+            <label><i class="fa fa-boxes"></i> Quantity</label>
+            <div class="quantity-container">
+                <button id="decreaseQty"><i class="fa fa-minus"></i></button>
+                <input id="quantityInput" type="number" value="1" min="1">
+                <button id="increaseQty"><i class="fa fa-plus"></i></button>
+            </div>
+
+            <button id="calculateBtn"><i class="fa fa-calculator"></i> Calculate</button>
+        </div>
+
+        <div id="results" class="results" style="display:none;"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
