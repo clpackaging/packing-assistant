@@ -306,3 +306,92 @@ button i {
     border-color: #314141;
 }
 
+
+/* Mobile adjustments for screens <= 768px */
+@media (max-width: 768px) {
+
+    /* Container */
+    .container {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 100%;
+    }
+
+    /* Results: stack cards vertically */
+    .results {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Card adjustments */
+    .card {
+        padding: 20px;
+        font-size: 14px;
+    }
+
+    .card h4 {
+        font-size: 18px;
+    }
+
+    /* Rows inside cards: stack label + value */
+    .row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 12px;
+        gap: 6px;
+    }
+
+    .row span:last-child {
+        justify-content: flex-start;
+        margin-top: 4px;
+        word-break: break-word;
+    }
+
+    /* Inputs and quantity controls */
+    input[type="number"], 
+    .quantity-container input, 
+    button#calculateBtn {
+        font-size: 14px;
+        padding: 12px;
+        width: 100%;
+    }
+
+    .quantity-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* Buttons / links inside cards */
+    .card a.button {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    /* Optional: hide icons for very small screens */
+    .card h4 i {
+        display: none;
+    }
+}
+
+/* Optional adjustments for very small phones <= 480px */
+@media (max-width: 480px) {
+    .card {
+        padding: 15px;
+    }
+
+    .row {
+        padding: 8px 10px;
+    }
+
+    button#calculateBtn {
+        font-size: 13px;
+        padding: 10px;
+    }
+}
+
+
