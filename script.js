@@ -141,7 +141,7 @@ function calculatePackaging() {
             <div class="row"><span><i class="fa fa-boxes"></i> Items per Box:</span><span>${bestOption.itemsPerBox}</span></div>
             <div class="row"><span><i class="fa fa-cubes"></i> Total Boxes:</span><span>${totalBoxes}</span></div>
             <div class="row"><span><i class="fa fa-cube"></i> Free Volume:</span><span>${bestOption.freeVol.toLocaleString()} cm³</span></div>
-            <a class="buy-btn" href="https://www.clpackaging.com/product-page/carton-box-rectangle" target="_blank">Buy Carton Boxes</a>
+            <a class="buy-btn" href="${bestOption.box.link}" target="_blank">Buy Carton Boxes</a>
             </div>
 
         <div class="card">
