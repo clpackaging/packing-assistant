@@ -38,9 +38,13 @@ function calculatePackaging() {
     }
 
     const boxes = [
+        { name: "R0D", L: 60, W: 40, H: 50, link: "https://www.clpackaging.com/product-page/carton-box-double-walled-rectangle" },
         { name: "R1S", L: 50, W: 30, H: 38, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" },
         { name: "R2S", L: 50, W: 25, H: 33, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" },
-        { name: "R3S", L: 43, W: 22, H: 30, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" }
+        { name: "R3S", L: 43, W: 22, H: 30, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" },
+        { name: "R4S", L: 30, W: 25, H: 20, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" },
+        { name: "R5S", L: 26, W: 20, H: 15, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" },
+        { name: "R6S", L: 22, W: 16, H: 10, link: "https://www.clpackaging.com/product-page/carton-box-rectangle" },
     ];
 
     const orientations = [
@@ -55,30 +59,57 @@ function calculatePackaging() {
     let bestOption = null;
 
     for (let box of boxes) {
-        let bestFit = { itemsPerBox: 0, orientation: null, freeVol: Infinity };
+
+        let bestFitForThisBox = null;
+
         orientations.forEach(o => {
             const [l, w, h] = o;
+
             if (l <= box.L && w <= box.W && h <= box.H) {
+
                 const fitX = Math.floor(box.L / l);
                 const fitY = Math.floor(box.W / w);
                 const fitZ = Math.floor(box.H / h);
                 const totalFit = fitX * fitY * fitZ;
 
-                if (totalFit > bestFit.itemsPerBox ||
-                    (totalFit === bestFit.itemsPerBox && ((box.L*box.W*box.H) - (l*w*h)) < bestFit.freeVol)) {
-                    bestFit = { itemsPerBox: totalFit, orientation: { L: l, W: w, H: h }, freeVol: (box.L*box.W*box.H) - (l*w*h) };
+                if (totalFit > 0) {
+
+                    const boxVolume = box.L * box.W * box.H;
+                    const usedVolume = totalFit * (l * w * h);
+                    const freeVol = boxVolume - usedVolume;
+
+                    if (
+                        !bestFitForThisBox ||
+                        freeVol < bestFitForThisBox.freeVol
+                    ) {
+                        bestFitForThisBox = {
+                            itemsPerBox: totalFit,
+                            orientation: { L: l, W: w, H: h },
+                            freeVol: freeVol,
+                            boxVolume: boxVolume
+                        };
+                    }
                 }
             }
         });
 
-        if (bestFit.itemsPerBox > 0) {
-            bestOption = { box, ...bestFit };
-            break;
+        if (bestFitForThisBox) {
+
+            if (
+                !bestOption ||
+                bestFitForThisBox.boxVolume < bestOption.boxVolume ||
+                (
+                    bestFitForThisBox.boxVolume === bestOption.boxVolume &&
+                    bestFitForThisBox.freeVol < bestOption.freeVol
+                )
+            ) {
+                bestOption = { box, ...bestFitForThisBox };
+            }
         }
     }
 
     if (!bestOption) {
-        resultsEl.innerHTML = `<div class="card"><h4>No Suitable Box Found</h4><p>Your item is too large for R1S, R2S, or R3S.</p></div>`;
+        resultsEl.innerHTML = `<div class="card"><h4>No Suitable Box Found</h4><p>Your item is too large for R0D.</p></div>`;
         resultsEl.style.display = "flex";
         return;
     }
